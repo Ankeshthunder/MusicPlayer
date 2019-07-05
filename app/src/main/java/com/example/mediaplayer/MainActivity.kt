@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.*
+import android.text.TextUtils
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -41,7 +42,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
 
-        track = findViewById<TextView>(R.id.songname)
+        track = findViewById(R.id.songname)
+        track.isSelected=true
+        track.setSingleLine()
 
 
         //function call to play song
@@ -176,6 +179,8 @@ class MainActivity : AppCompatActivity() {
         mp = MediaPlayer.create(this, uri)
         sname = msong[positn].name.toString()
         track.text = sname
+
+
         mp.start()
     }
 
@@ -188,7 +193,6 @@ class MainActivity : AppCompatActivity() {
         sname = msong.get(positn).name.toString()
         val songname = i.getStringExtra("songname")
         track.text = songname
-
 
         positn = bd.getInt("pos", 0)
 

@@ -146,7 +146,8 @@ class songslist : AppCompatActivity() {
             }
             R.id.nowplay -> {
 
-                startActivity(Intent(this, MainActivity::class.java))
+                intent= Intent(this,MainActivity::class.java)
+                startActivity(intent)
                 return true
             }
         }
