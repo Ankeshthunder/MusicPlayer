@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/search_button"
+            android:title="Search"
+            android:icon="@android:drawable/ic_menu_search"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/favourite"
+            android:title="Fav play"
+            app:showAsAction="never" />
+
+    <item
+            android:id="@+id/recent"
+            android:title="Recentplay"
+            app:showAsAction="never" />
+    <item
+            android:id="@+id/frequent"
+            android:title="Frequently play"
+            app:showAsAction="never" />
+    <item
+            android:id="@+id/nowplay"
+            android:title="My player"
+            android:icon="@android:drawable/ic_media_play"
+            app:showAsAction="always" />
+
+</menu>
