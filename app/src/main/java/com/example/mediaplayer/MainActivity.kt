@@ -1,25 +1,19 @@
 package com.example.mediaplayer
 
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
+import android.content.Context
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_main.*
-import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.*
-import android.text.TextUtils
-import android.util.Log
-import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.ListView
+import android.os.Build.VERSION_CODES.M
 import android.widget.TextView
 import java.io.File
-import java.util.ArrayList
+import java.nio.file.Files.size
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -96,7 +90,7 @@ class MainActivity : AppCompatActivity() {
             while (mp != null) {
                 try {
                     var msg = Message()
-                    msg.what = mp .currentPosition
+                    msg.what = mp.currentPosition
                     handler.sendMessage(msg)
                     Thread.sleep(1000)
                 } catch (e: InterruptedException) {
@@ -125,7 +119,22 @@ class MainActivity : AppCompatActivity() {
             var remTime = createTime(totTime - curposition)
             remainingtime.text = "-$remTime"
 
+            if(remTime=="0:00")
+            {
+                mp.stop()
+                mp.release()
+                val rand = Random()
+                positn = rand.nextInt((msong.size) - 1 - 0 + 1) + 0
+                sname = msong.get(positn).name.toString()
+                track.text=sname
+                val uri = Uri.parse(msong.get(positn).toString())
+                creator(uri)
+
+            }
+
+
         }
+
     }
 
     // Timelabel updater
@@ -158,15 +167,18 @@ class MainActivity : AppCompatActivity() {
     }
 
         //forward song button
-        fun nextsong(v: View) {
-            mp.stop()
-            mp.release()
-            positn = (positn + 1) % msong.size
-            val uri = Uri.parse(msong[positn].toString())
-            mp = MediaPlayer.create(this, uri)
-            sname = msong[positn].name.toString()
-            track.text = sname
-            mp.start()
+        fun nextsong(v: View)
+        {
+
+                mp.stop()
+                mp.release()
+                positn = (positn + 1) % msong.size
+                val uri = Uri.parse(msong[positn].toString())
+                mp = MediaPlayer.create(this, uri)
+                sname = msong[positn].name.toString()
+                track.text = sname
+                mp.start()
+
         }
 
     //previous song button
@@ -179,36 +191,42 @@ class MainActivity : AppCompatActivity() {
         mp = MediaPlayer.create(this, uri)
         sname = msong[positn].name.toString()
         track.text = sname
-
-
         mp.start()
     }
 
     //song player
-    fun playsong() {
+    fun playsong()
+    {
 
         val i = intent
         var bd = i.extras
         msong = bd.getParcelableArrayList<Parcelable>("songs") as ArrayList<File>
+
         sname = msong.get(positn).name.toString()
         val songname = i.getStringExtra("songname")
         track.text = songname
-
         positn = bd.getInt("pos", 0)
 
         val uri = Uri.parse(msong.get(positn).toString())
-        mp = MediaPlayer.create(this, uri)
-        mp.start()
-        mp.isLooping = true
-        mp.setVolume(3.5f, 3.5f)
-        totTime = mp.duration
-            }
+        creator(uri)
+
+    }
 
      // action bar button
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
+
+     fun creator( u:Uri){
+         mp = MediaPlayer.create(this, u)
+         mp.start()
+         mp.setVolume(5.5f, 5.5f)
+         totTime = mp.duration
+         posbar.max=mp.duration
+     }
+
+    
 }
 
 
