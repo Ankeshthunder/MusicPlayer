@@ -17,15 +17,17 @@ import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_songslist.*
 
 
 class songslist : AppCompatActivity() {
      lateinit var list: ListView
+    lateinit var mysongs:ArrayList<File>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_songslist)
 
-         list =findViewById<ListView>(R.id.mysongs)
+         list =findViewById(R.id.mysongs)
 
         if (ContextCompat.checkSelfPermission(
                 this, Manifest.permission.READ_EXTERNAL_STORAGE
@@ -88,16 +90,8 @@ class songslist : AppCompatActivity() {
             items[i] = mysongs[i].name.toString().replace(".mp3", "").replace(".wav", "")
 
         }
-        val myAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
+         var myAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         list.adapter=myAdapter
-
-        val sArtworkUri = Uri
-            .parse("content://media/external/audio/albumart")
-
-       /* val uri = ContentUris.withAppendedId(
-            PlayerConstants.sArtworkUri,
-            listOfAlbums.get(position).getAlbumID()
-        )*/
 
         list.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             val songname = list.getItemAtPosition(position).toString()
@@ -129,7 +123,10 @@ class songslist : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.search_button -> {
-                Toast.makeText(this, "SEARCH", Toast.LENGTH_LONG).show()
+              //  Toast.makeText(this, "SEARCH", Toast.LENGTH_LONG).show()
+                startActivity(Intent(this, searchview::class.java)
+                    .putExtra("songs",mysongs))
+
                 return true
             }
             R.id.favourite -> {
@@ -146,8 +143,7 @@ class songslist : AppCompatActivity() {
             }
             R.id.nowplay -> {
 
-                intent= Intent(this,MainActivity::class.java)
-                startActivity(intent)
+                startActivity( Intent(this@songslist,MainActivity::class.java))
                 return true
             }
         }

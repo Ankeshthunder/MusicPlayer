@@ -1,7 +1,6 @@
 package com.example.mediaplayer
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -9,10 +8,8 @@ import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_main.*
 import android.net.Uri
 import android.os.*
-import android.os.Build.VERSION_CODES.M
 import android.widget.TextView
 import java.io.File
-import java.nio.file.Files.size
 import java.util.*
 
 
@@ -174,10 +171,9 @@ class MainActivity : AppCompatActivity() {
                 mp.release()
                 positn = (positn + 1) % msong.size
                 val uri = Uri.parse(msong[positn].toString())
-                mp = MediaPlayer.create(this, uri)
                 sname = msong[positn].name.toString()
                 track.text = sname
-                mp.start()
+                creator(uri)
 
         }
 
@@ -188,10 +184,10 @@ class MainActivity : AppCompatActivity() {
         mp.release()
         positn = if (positn - 1 < 0) msong.size - 1 else positn - 1
         val uri = Uri.parse(msong[positn].toString())
-        mp = MediaPlayer.create(this, uri)
         sname = msong[positn].name.toString()
         track.text = sname
-        mp.start()
+        creator(uri)
+
     }
 
     //song player
@@ -220,13 +216,13 @@ class MainActivity : AppCompatActivity() {
 
      fun creator( u:Uri){
          mp = MediaPlayer.create(this, u)
-         mp.start()
          mp.setVolume(5.5f, 5.5f)
          totTime = mp.duration
          posbar.max=mp.duration
+         mp.start()
      }
 
-    
+
 }
 
 
