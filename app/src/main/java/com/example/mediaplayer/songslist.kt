@@ -17,12 +17,15 @@ import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_songslist.*
 
 
 class songslist : AppCompatActivity() {
      lateinit var list: ListView
     lateinit var mysongs:ArrayList<File>
+    lateinit var songname:String
+     var position:Int =0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_songslist)
@@ -124,9 +127,8 @@ class songslist : AppCompatActivity() {
         when (item.itemId) {
             R.id.search_button -> {
               //  Toast.makeText(this, "SEARCH", Toast.LENGTH_LONG).show()
-                startActivity(Intent(this, searchview::class.java)
+                startActivity(Intent(this@songslist, searchview::class.java)
                     .putExtra("songs",mysongs))
-
                 return true
             }
             R.id.favourite -> {
@@ -143,7 +145,10 @@ class songslist : AppCompatActivity() {
             }
             R.id.nowplay -> {
 
-                startActivity( Intent(this@songslist,MainActivity::class.java))
+                startActivity( Intent(applicationContext,MainActivity::class.java))
+                  //  .putExtra("songs", mysongs).putExtra("songname", songname)
+                  //  .putExtra("pos", position))
+
                 return true
             }
         }

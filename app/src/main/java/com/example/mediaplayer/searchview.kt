@@ -1,8 +1,11 @@
 package com.example.mediaplayer
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.os.Parcelable
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.SearchView
@@ -30,7 +33,8 @@ class searchview : AppCompatActivity() {
         val i = intent
         var bd = i.extras
         msong = bd.getParcelableArrayList<Parcelable>("songs") as ArrayList<File>
-        var items = arrayOfNulls<String>(msong.size)
+
+        var items = ArrayList<String>(msong.size)
 
         for (i in msong.indices)
         {
@@ -50,11 +54,26 @@ class searchview : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String): Boolean
             {
-                myAdapter.getFilter().filter(newText)
+                if (newText != null && !newText.isEmpty()) {
+                    val found = ArrayList<String>()
+                    for (item in items) {
+                        if (item.contains(newText)) {
+                            found.add(item)
+                        }
+                    }
+                    val adapter = ArrayAdapter(this@searchview, android.R.layout.simple_list_item_1, found)
+                    plist.setAdapter(adapter)
+                } else {
+                    val adapter = ArrayAdapter(this@searchview, android.R.layout.simple_list_item_1, items)
+                    plist.setAdapter(adapter)
+                }
+
                 return false
             }
         })
     }
+
+
 
     override fun onSupportNavigateUp(): Boolean
     {

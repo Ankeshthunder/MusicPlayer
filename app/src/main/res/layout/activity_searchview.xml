@@ -6,8 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".searchview">
-    <SearchView android:layout_width="352dp"
-                android:layout_height="33dp"
+    <SearchView android:layout_width="380dp"
+                android:layout_height="43dp"
                 android:id="@+id/Sview"
                 android:queryHint="search here"
                 android:iconifiedByDefault="false"
@@ -18,16 +18,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                app:layout_constraintVertical_bias="0.0"></SearchView>
+                app:layout_constraintVertical_bias="0.0" app:layout_constraintHorizontal_bias="0.0"></SearchView>
     <ListView
-            android:layout_width="395dp"
+            android:layout_width="392dp"
             android:id="@+id/Plist"
             android:padding="10dp"
-            android:layout_height="546dp" android:layout_marginBottom="8dp"
+            android:layout_height="625dp" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="@+id/sview" app:layout_constraintVertical_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="@+id/Sview"
+            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.756"/>
 
 
 </android.support.constraint.ConstraintLayout>

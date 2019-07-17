@@ -195,17 +195,18 @@ class MainActivity : AppCompatActivity() {
     {
 
         val i = intent
-        var bd = i.extras
-        msong = bd.getParcelableArrayList<Parcelable>("songs") as ArrayList<File>
+        var bd:Bundle = i.extras
 
-        sname = msong.get(positn).name.toString()
-        val songname = i.getStringExtra("songname")
-        track.text = songname
-        positn = bd.getInt("pos", 0)
+            msong = bd.getParcelableArrayList<Parcelable>("songs") as ArrayList<File>
 
-        val uri = Uri.parse(msong.get(positn).toString())
-        creator(uri)
+            sname = msong.get(positn).name.toString()
+            val songname = i.getStringExtra("songname")
+            track.text = songname
+            positn = bd.getInt("pos", 0)
 
+
+            val uri = Uri.parse(msong.get(positn).toString())
+            creator(uri)
     }
 
      // action bar button
