@@ -3,6 +3,7 @@ package com.example.mediaplayer
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -32,13 +33,12 @@ class songslist : AppCompatActivity() {
 
          list =findViewById(R.id.mysongs)
 
-        if (ContextCompat.checkSelfPermission(
-                this, Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 0)
-        } else {
-             display()
+        }
+        else {
+            display()
         }
 
         //actionbar
@@ -83,7 +83,7 @@ class songslist : AppCompatActivity() {
 
     //playlist maker
 
-    fun display() {
+    private fun display() {
 
         val mysongs = findsong(Environment.getExternalStorageDirectory())
          var items = arrayOfNulls<String>(mysongs.size)
@@ -98,7 +98,6 @@ class songslist : AppCompatActivity() {
 
         list.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             val songname = list.getItemAtPosition(position).toString()
-
 
             startActivity(
                 Intent(this, MainActivity::class.java)
@@ -127,8 +126,10 @@ class songslist : AppCompatActivity() {
         when (item.itemId) {
             R.id.search_button -> {
               //  Toast.makeText(this, "SEARCH", Toast.LENGTH_LONG).show()
-                startActivity(Intent(this@songslist, searchview::class.java)
-                    .putExtra("songs",mysongs))
+                val intent = Intent(this, searchview::class.java).apply {
+                    putExtra("songs", mysongs)
+                }
+                startActivity(intent)
                 return true
             }
             R.id.favourite -> {

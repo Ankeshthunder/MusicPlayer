@@ -11,6 +11,12 @@ import android.os.*
 import android.widget.TextView
 import java.io.File
 import java.util.*
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import android.media.MediaMetadataRetriever
+import android.widget.ImageView
+import android.content.ContentUris
+import java.io.ByteArrayInputStream
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var msong : ArrayList<File>
     lateinit var  sname: String
     lateinit var track: TextView
+    lateinit var songpic:ImageView
+    lateinit var artname:TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +39,10 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.title = "Now Playing"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-
-
+        artname= findViewById(R.id.artname)
+        artname.isSelected=true
+        artname.setSingleLine()
+        songpic= findViewById(R.id.songpic)
         track = findViewById(R.id.songname)
         track.isSelected=true
         track.setSingleLine()
@@ -45,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //volume bar
-        volmbar.setOnSeekBarChangeListener(
+      /*  volmbar.setOnSeekBarChangeListener(
             object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                     if (fromUser) {
@@ -62,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
-        )
+        )*/
 
         //song progress timer
         posbar.max = totTime
@@ -125,6 +135,7 @@ class MainActivity : AppCompatActivity() {
                 sname = msong.get(positn).name.toString()
                 track.text=sname
                 val uri = Uri.parse(msong.get(positn).toString())
+                albumart(uri)
                 creator(uri)
 
             }
@@ -173,6 +184,7 @@ class MainActivity : AppCompatActivity() {
                 val uri = Uri.parse(msong[positn].toString())
                 sname = msong[positn].name.toString()
                 track.text = sname
+                albumart(uri)
                 creator(uri)
 
         }
@@ -186,6 +198,7 @@ class MainActivity : AppCompatActivity() {
         val uri = Uri.parse(msong[positn].toString())
         sname = msong[positn].name.toString()
         track.text = sname
+        albumart(uri)
         creator(uri)
 
     }
@@ -203,9 +216,8 @@ class MainActivity : AppCompatActivity() {
             val songname = i.getStringExtra("songname")
             track.text = songname
             positn = bd.getInt("pos", 0)
-
-
             val uri = Uri.parse(msong.get(positn).toString())
+             albumart(uri)
             creator(uri)
     }
 
@@ -223,6 +235,28 @@ class MainActivity : AppCompatActivity() {
          mp.start()
      }
 
+     fun albumart(u:Uri) :Unit {
+          val mmr = MediaMetadataRetriever()
+         mmr.setDataSource(this,u)
+         val data = mmr.embeddedPicture
+         if (data!=null) {
+             val bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
+             songpic.setImageBitmap(bitmap)
+         }
+         else
+         {
+             songpic.setImageDrawable(resources.getDrawable(R.drawable.ms))
+         }
+
+         val artist = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST)
+         if(artist !=null) {
+             artname.setText(artist)
+         }
+         else
+         {
+             artname.text=(sname)
+         }
+     }
 
 }
 

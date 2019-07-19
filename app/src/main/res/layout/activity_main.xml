@@ -10,49 +10,54 @@
 
 
     <ImageView
-            android:layout_width="250dp"
-            android:background="@drawable/ms"
-            android:layout_height="167dp"
+            android:layout_width="409dp"
+            android:layout_height="273dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:id="@+id/songpic" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.061"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0"
             android:layout_marginEnd="8dp" android:layout_marginStart="8dp"
-            app:layout_constraintHorizontal_bias="0.496"/>
+    />
     <TextView
             android:text="0:11"
             android:textColor="@android:color/holo_red_dark"
-            android:layout_width="50dp"
-            android:layout_height="26dp"
+            android:layout_width="41dp"
+            android:layout_height="23dp"
             android:id="@+id/elapsedtimer"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
-            app:layout_constraintVertical_bias="0.538" app:layout_constraintEnd_toStartOf="@+id/remainingtime"
+            app:layout_constraintVertical_bias="0.75" app:layout_constraintEnd_toStartOf="@+id/remainingtime"
             android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintHorizontal_bias="0.054"/>
+            app:layout_constraintHorizontal_bias="0.01"/>
     <TextView
             android:text="4:11"
             android:textColor="@android:color/holo_red_dark"
-            android:layout_width="44dp"
-            android:layout_height="28dp"
+            android:layout_width="41dp"
+            android:layout_height="23dp"
+            android:gravity="center"
             android:id="@+id/remainingtime"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.923" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.548"/>
+            app:layout_constraintHorizontal_bias="0.98" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.75"
+            android:layout_marginTop="8dp"/>
     <ImageButton
             android:layout_width="61dp"
             android:background="@android:color/background_dark"
-            android:layout_height="55dp" app:srcCompat="@android:drawable/ic_media_previous"
+            android:layout_height="55dp"
+            app:srcCompat="@android:drawable/ic_media_previous"
             android:id="@+id/previous"
             android:onClick="prevsong"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.17" android:layout_marginTop="8dp"
+            app:layout_constraintHorizontal_bias="0.086" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.699"/>
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.958"/>
     <ImageButton
             android:layout_width="63dp"
             android:layout_height="55dp" app:srcCompat="@android:drawable/ic_media_next"
@@ -61,77 +66,63 @@
             android:onClick="nextsong"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.811" android:layout_marginTop="8dp"
+            app:layout_constraintHorizontal_bias="0.876" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.699"/>
-    <ImageButton
-            android:layout_width="61dp"
-            android:background="@android:color/holo_green_light"
-            android:layout_height="45dp" app:srcCompat="@android:drawable/ic_lock_silent_mode"
-            android:id="@+id/soundoff" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.837" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/soundon" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.083"/>
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.956"/>
     <SeekBar
-            android:layout_width="187dp"
-            android:layout_height="24dp"
-            android:background="@android:color/background_light"
-            android:id="@+id/volmbar"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/soundon" android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintHorizontal_bias="0.503" app:layout_constraintVertical_bias="0.829"
-            app:layout_constraintStart_toStartOf="@+id/soundoff"/>
-    <ImageButton
-            android:layout_width="57dp"
-            android:background="@android:color/holo_green_light"
-            android:layout_height="40dp" app:srcCompat="@android:drawable/ic_lock_silent_mode_off"
-            android:id="@+id/soundon" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.84"
-            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.958"/>
-    <SeekBar
-            android:layout_width="343dp"
-            android:layout_height="19dp"
+            android:layout_width="375dp"
+            android:layout_height="12dp"
             android:background="@android:color/background_light"
             android:id="@+id/posbar" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintTop_toTopOf="@+id/songpic"
             android:layout_marginTop="228dp"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/play"
-            app:layout_constraintVertical_bias="0.139" app:layout_constraintHorizontal_bias="0.365"/>
+            app:layout_constraintVertical_bias="0.69" app:layout_constraintHorizontal_bias="0.365"/>
     <Button
             android:background="@drawable/ic_media_pause"
-            android:layout_width="63dp"
-            android:layout_height="63dp"
+            android:backgroundTint="@color/black"
+            android:layout_width="71dp"
+            android:layout_height="80dp"
             android:onClick="playbtn"
             android:id="@+id/play"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/volmbar"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="@+id/previous"
-            app:layout_constraintVertical_bias="0.652"
             android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="@+id/forward" app:layout_constraintTop_toBottomOf="@+id/songpic"
-            app:layout_constraintHorizontal_bias="0.512"/>
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.829"/>
     <TextView
             android:text="song name"
             android:textSize="20dp"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@color/black"
             android:layout_width="329dp"
             android:layout_height="30dp"
+            android:gravity="start"
             android:ellipsize="marquee"
             android:focusable="true"
             android:marqueeRepeatLimit="marquee_forever"
             android:id="@+id/songname" android:layout_marginBottom="8dp"
             app:layout_constraintTop_toTopOf="@+id/songpic" app:layout_constraintBottom_toBottomOf="@+id/play"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.534" android:layout_marginEnd="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp" app:layout_constraintVertical_bias="0.616"
+            app:layout_constraintHorizontal_bias="0.0"/>
+    <TextView
+            android:text=""
+            android:textSize="15dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="166dp"
+            android:layout_height="18dp"
+            android:gravity="start"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:id="@+id/artname" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_bias="0.657"
+            android:layout_marginTop="8dp" app:layout_constraintBottom_toBottomOf="@+id/play"
+            app:layout_constraintHorizontal_bias="0.0"/>
 </android.support.constraint.ConstraintLayout>
