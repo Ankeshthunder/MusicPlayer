@@ -232,6 +232,10 @@ class MainActivity : AppCompatActivity() {
          mp.setVolume(5.5f, 5.5f)
          totTime = mp.duration
          posbar.max=mp.duration
+         if(mp.isPlaying)
+         {
+
+         }
          mp.start()
      }
 
